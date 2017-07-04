@@ -1,9 +1,9 @@
-![Blackbox SDK](https://raw.githubusercontent.com/brightinteractive/blackbox-sdk-ios/master/blackbox.svg)
+![Blackbox SDK](https://cdn.rawgit.com/brightinteractive/blackbox-sdk-ios/master/blackbox.svg)
 
 Blackbox Platform is your virtual campaign manager for Apple Search Ads.
 It automatically selects keywords to bid on and automatically adjust your bid strategy to give you the best results for your money.
 
-Integrating the Blackbox SDK into your app provides the platform with additonal information, enabling it to inform you about the profitability of your search ad campaign, helping it further optimise your bid strategy and providing the best return for you.
+Integrating the Blackbox SDK into your app provides the platform with additonal information, enabling it to inform you about the profitability of your search ad campaign, helping it further optimise your bid strategy and providing the best return for your money.
 
 
 # Getting started
