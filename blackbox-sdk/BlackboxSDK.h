@@ -5,7 +5,7 @@
 
 @interface BlackboxSDK : NSObject
 
-+ (instancetype)sharedSDK;
++ (instancetype)sdk;
 
 - (void)recordRevenue:(double)value withCurrency:(NSString *)currency;
 
@@ -20,3 +20,6 @@ OBJC_EXTERN NSString *BBPCurrencyNZD;
 @interface BlackboxSDK (BlackboxSDKUnavailable)
 - (instancetype)init OBJC_UNAVAILABLE("Use [BlackboxSDK sharedSDK], not [BlackboxSDK new] or [[BlackboxSDK alloc] init]");
 @end
+
+FOUNDATION_EXPORT double blackbox_sdkVersionNumber;
+FOUNDATION_EXPORT const unsigned char blackbox_sdkVersionString[];

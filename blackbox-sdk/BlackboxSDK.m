@@ -17,20 +17,20 @@
 #define HAS_LAUNCHED_KEY @"BBPApplicationHasLaunched"
 
 + (void)load {
-    [[NSNotificationCenter defaultCenter] addObserver:[self sharedSDK]
+    [[NSNotificationCenter defaultCenter] addObserver:[self sdk]
                                              selector:@selector(handleApplicationLaunched:)
                                                  name:UIApplicationDidFinishLaunchingNotification
                                                object:nil];
 
     [[ADClient sharedClient] requestAttributionDetailsWithBlock:^(NSDictionary *attributionDetails, NSError *error) {
         if (attributionDetails[@"iad-attribution"] && attributionDetails[@"iad-campaign-id"]) {
-            [[self sharedSDK] handleAttributionDetectedForCampaign:attributionDetails[@"iad-campaign-id"]
+            [[self sdk] handleAttributionDetectedForCampaign:attributionDetails[@"iad-campaign-id"]
                                                             withKeyword:attributionDetails[@"iad-keyword"]];
         }
     }];
 }
 
-+ (instancetype)sharedSDK {
++ (instancetype)sdk {
     static BlackboxSDK *instance;
     static dispatch_once_t onceToken;
 
@@ -63,7 +63,7 @@
 
 - (void)handleApplicationLaunched:(id)_ {
     if (![[NSUserDefaults standardUserDefaults] boolForKey:HAS_LAUNCHED_KEY]) {
-        [_client dispatchEvent:[[BBPEvent alloc] initWithName:@"launch"]];
+        [_client dispatchEvent:[[BBPEvent alloc] initWithName:@"install"]];
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:HAS_LAUNCHED_KEY];
         [[NSUserDefaults standardUserDefaults] synchronize];
     }
