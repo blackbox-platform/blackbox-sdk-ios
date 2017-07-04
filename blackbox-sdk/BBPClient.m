@@ -5,6 +5,13 @@
 #import "BBPEvent.h"
 #import "Util.h"
 
+#if DEBUG
+#define BLACKBOX_API [NSProcessInfo processInfo].environment[@"BLACKBOX_API"]
+#else
+#define BLACKBOX_API @"https://blackbox-platform-prod.herokuapp.com"
+#endif
+
+
 typedef enum {
     STATE_PENDING,
     STATE_DISABLED,
