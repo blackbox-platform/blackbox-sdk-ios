@@ -5,8 +5,6 @@
 #import "BBPEvent.h"
 #import "Util.h"
 
-#define BLACKBOX_API @"https://blackbox-testing.herokuapp.com"
-
 typedef enum {
     STATE_PENDING,
     STATE_DISABLED,
