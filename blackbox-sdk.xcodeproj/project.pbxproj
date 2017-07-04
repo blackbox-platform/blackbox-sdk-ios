@@ -8,12 +8,29 @@
 
 /* Begin PBXBuildFile section */
 		2C5835631F0A8BB8008E1856 /* blackbox-sdk.h in Headers */ = {isa = PBXBuildFile; fileRef = 2C5835551F0A8BB8008E1856 /* blackbox-sdk.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		2CD7BF561F0B971B000BA4C0 /* BlackboxSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 2CD7BF541F0B971B000BA4C0 /* BlackboxSDK.h */; };
+		2CD7BF571F0B971B000BA4C0 /* BlackboxSDK.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CD7BF551F0B971B000BA4C0 /* BlackboxSDK.m */; };
+		2CD7BF5A1F0B9C5E000BA4C0 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CD7BF591F0B9C5E000BA4C0 /* UIKit.framework */; };
+		2CD7BF5C1F0B9C85000BA4C0 /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CD7BF5B1F0B9C85000BA4C0 /* iAd.framework */; };
+		2CD7BF631F0BAB10000BA4C0 /* BBPEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = 2CD7BF611F0BAB10000BA4C0 /* BBPEvent.h */; };
+		2CD7BF641F0BAB10000BA4C0 /* BBPEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CD7BF621F0BAB10000BA4C0 /* BBPEvent.m */; };
+		2CD7BF681F0BADD3000BA4C0 /* BBPClient.h in Headers */ = {isa = PBXBuildFile; fileRef = 2CD7BF661F0BADD3000BA4C0 /* BBPClient.h */; };
+		2CD7BF691F0BADD3000BA4C0 /* BBPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CD7BF671F0BADD3000BA4C0 /* BBPClient.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		2C5835521F0A8BB8008E1856 /* BlackboxSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BlackboxSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C5835551F0A8BB8008E1856 /* blackbox-sdk.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "blackbox-sdk.h"; sourceTree = "<group>"; };
 		2C5835561F0A8BB8008E1856 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2CD7BF541F0B971B000BA4C0 /* BlackboxSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlackboxSDK.h; sourceTree = "<group>"; };
+		2CD7BF551F0B971B000BA4C0 /* BlackboxSDK.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlackboxSDK.m; sourceTree = "<group>"; };
+		2CD7BF591F0B9C5E000BA4C0 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		2CD7BF5B1F0B9C85000BA4C0 /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
+		2CD7BF611F0BAB10000BA4C0 /* BBPEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBPEvent.h; sourceTree = "<group>"; };
+		2CD7BF621F0BAB10000BA4C0 /* BBPEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBPEvent.m; sourceTree = "<group>"; };
+		2CD7BF651F0BACAE000BA4C0 /* Util.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Util.h; sourceTree = "<group>"; };
+		2CD7BF661F0BADD3000BA4C0 /* BBPClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBPClient.h; sourceTree = "<group>"; };
+		2CD7BF671F0BADD3000BA4C0 /* BBPClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBPClient.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -21,6 +38,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2CD7BF5C1F0B9C85000BA4C0 /* iAd.framework in Frameworks */,
+				2CD7BF5A1F0B9C5E000BA4C0 /* UIKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -32,6 +51,7 @@
 			children = (
 				2C5835541F0A8BB8008E1856 /* blackbox-sdk */,
 				2C5835531F0A8BB8008E1856 /* Products */,
+				2CD7BF581F0B9C5E000BA4C0 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -48,8 +68,24 @@
 			children = (
 				2C5835551F0A8BB8008E1856 /* blackbox-sdk.h */,
 				2C5835561F0A8BB8008E1856 /* Info.plist */,
+				2CD7BF541F0B971B000BA4C0 /* BlackboxSDK.h */,
+				2CD7BF551F0B971B000BA4C0 /* BlackboxSDK.m */,
+				2CD7BF661F0BADD3000BA4C0 /* BBPClient.h */,
+				2CD7BF671F0BADD3000BA4C0 /* BBPClient.m */,
+				2CD7BF611F0BAB10000BA4C0 /* BBPEvent.h */,
+				2CD7BF621F0BAB10000BA4C0 /* BBPEvent.m */,
+				2CD7BF651F0BACAE000BA4C0 /* Util.h */,
 			);
 			path = "blackbox-sdk";
+			sourceTree = "<group>";
+		};
+		2CD7BF581F0B9C5E000BA4C0 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				2CD7BF5B1F0B9C85000BA4C0 /* iAd.framework */,
+				2CD7BF591F0B9C5E000BA4C0 /* UIKit.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -59,7 +95,10 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2CD7BF681F0BADD3000BA4C0 /* BBPClient.h in Headers */,
 				2C5835631F0A8BB8008E1856 /* blackbox-sdk.h in Headers */,
+				2CD7BF631F0BAB10000BA4C0 /* BBPEvent.h in Headers */,
+				2CD7BF561F0B971B000BA4C0 /* BlackboxSDK.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -131,6 +170,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2CD7BF571F0B971B000BA4C0 /* BlackboxSDK.m in Sources */,
+				2CD7BF691F0BADD3000BA4C0 /* BBPClient.m in Sources */,
+				2CD7BF641F0BAB10000BA4C0 /* BBPEvent.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
