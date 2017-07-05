@@ -72,7 +72,7 @@ typedef enum {
             
             NSMutableURLRequest *req = [NSMutableURLRequest requestWithURL:[self urlForEventType:event.type]];
             
-            [req setHTTPMethod:@"POST"];
+            [req setHTTPMethod:@"PUT"];
             [req setHTTPBody:body];
             [req setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
             [req setValue:[NSString stringWithFormat:@"Bearer %@", _token] forHTTPHeaderField:@"Authorization"];
