@@ -5,35 +5,37 @@
 
 @implementation BBPEvent {
     NSDictionary *_data;
+    NSInteger _id;
+}
+
+- (instancetype)initWithType:(BBPEventType)type payload:(NSDictionary *)payload {
+    if (self = [super init]) {
+        _type = type;
+        _data = payload;
+        arc4random_buf(&_id, sizeof(_id));
+    }
+    
+    return self;
 }
 
 - (instancetype)initWithName:(NSString *)name {
-    if (self = [super init]) {
-        _type = BBPStandardEvent;
-        _data = @{@"name": name};
-    }
-    
-    return self;
+    return [self initWithType:BBPStandardEvent payload:@{@"name": name}];
 }
 
 - (instancetype)initMonetaryEventWithName:(NSString *)name value:(double)value currency:(NSString *)currency {
-    if (self = [super init]) {
-        _type = BBPRevenueEvent;
-        _data = @{@"name": name, @"value": [NSNumber numberWithDouble:value], @"currency": currency};
-    }
-    
-    return self;
+    return [self initWithType:BBPRevenueEvent payload:@{@"name": name, @"value": [NSNumber numberWithDouble:value], @"currency": currency}];
 }
 
 - (NSData *)payloadWithAttributionKeyword:(NSString *)keyword error:(NSError *__autoreleasing *)error {
     NSMutableDictionary *payload = [_data mutableCopy];
     payload[@"keyword"] = keyword;
+    payload[@"id"] = @(_id);
 
     return [NSJSONSerialization dataWithJSONObject:payload options:0 error:error];
 }
 
 - (NSString *)description {
-    return [NSString stringWithFormat:@"%@ %@", [self typeDescription], _data];
+    return [NSString stringWithFormat:@"%@ %@ %@", [self typeDescription], @(_id), _data];
 }
 
 - (NSString *)typeDescription {
