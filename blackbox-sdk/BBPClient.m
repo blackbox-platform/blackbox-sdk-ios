@@ -80,7 +80,8 @@ typedef enum {
                 if (error) {
                     LogError(error);
                 } else {
-                    LogDebug(@"Event dispatched successfuly");
+                    LogDebug(@"Event dispatched");
+                    LogError(response);
                 }
             }] resume];
 
