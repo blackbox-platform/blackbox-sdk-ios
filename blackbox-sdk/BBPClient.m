@@ -74,6 +74,7 @@ typedef enum {
             
             [req setHTTPMethod:@"POST"];
             [req setHTTPBody:body];
+            [req setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
             [req setValue:[NSString stringWithFormat:@"Bearer %@", _token] forHTTPHeaderField:@"Authorization"];
             
             [[[NSURLSession sharedSession] dataTaskWithRequest:req completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
