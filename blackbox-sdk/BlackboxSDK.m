@@ -22,12 +22,21 @@
                                                  name:UIApplicationDidFinishLaunchingNotification
                                                object:nil];
 
-    [[ADClient sharedClient] requestAttributionDetailsWithBlock:^(NSDictionary *attributionDetails, NSError *error) {
+    
+    [self requestAttributionDetailsWithBlock:^(NSDictionary *attributionDetails, NSError *error) {
         if (attributionDetails[@"iad-attribution"] && attributionDetails[@"iad-campaign-id"]) {
             [[self sdk] handleAttributionDetectedForCampaign:attributionDetails[@"iad-campaign-id"]
                                                             withKeyword:attributionDetails[@"iad-keyword"]];
         }
     }];
+}
+
++ (void)requestAttributionDetailsWithBlock:(void (^)(NSDictionary *attributionDetails, NSError *error))completionHandler {
+#ifdef DEBUG
+    completionHandler([NSProcessInfo processInfo].environment, nil);
+#else
+    [[ADClient sharedClient] requestAttributionDetailsWithBlock:completionHandler];
+#endif
 }
 
 + (instancetype)sdk {
@@ -39,6 +48,7 @@
 
         if (info[BLACKBOX_TOKEN_ID]) {
             instance = [[self alloc] initWithToken:info[BLACKBOX_TOKEN_ID]];
+            LogDebug(@"Initialized client");
 
         } else {
             LogError(@"BBPClientID is not set in your Info.plist. Blackbox Platform will not receive attribution events until this is added.");
