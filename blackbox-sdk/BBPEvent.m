@@ -32,4 +32,15 @@
     return [NSJSONSerialization dataWithJSONObject:payload options:0 error:error];
 }
 
+- (NSString *)description {
+    return [NSString stringWithFormat:@"%@ %@", [self typeDescription], _data];
+}
+
+- (NSString *)typeDescription {
+    switch (_type) {
+        case BBPRevenueEvent: return @"RevenueEvent";
+        case BBPStandardEvent: return @"StandardEvent";
+    }
+}
+
 @end

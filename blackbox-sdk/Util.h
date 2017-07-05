@@ -6,3 +6,9 @@
 static void LogError(id error) {
     NSLog(@"[Blackbox] %@", error);
 }
+
+static void LogDebug(id msg) {
+#ifdef DEBUG
+    NSLog(@"[Blackbox] %@", msg);
+#endif
+}

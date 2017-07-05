@@ -5,7 +5,7 @@
 #import "BBPEvent.h"
 #import "Util.h"
 
-#if DEBUG
+#ifdef DEBUG
 #define BLACKBOX_API [NSProcessInfo processInfo].environment[@"BLACKBOX_API"]
 #else
 #define BLACKBOX_API @"https://blackbox-platform-prod.herokuapp.com"
@@ -38,6 +38,8 @@ typedef enum {
 }
 
 - (void)activateWithCampaignId:(NSString *)campaignId keyword:(NSString *)keyword {
+    LogDebug(@"Activating");
+
     _campaignId = campaignId;
     _keyword = keyword;
     _state = STATE_ACTIVE;
@@ -50,11 +52,15 @@ typedef enum {
 }
 
 - (void)disable {
+    LogDebug(@"Disabling");
     _state = STATE_DISABLED;
     [_eventQueue removeAllObjects];
 }
 
 - (void)dispatchEvent:(BBPEvent *)event {
+    LogDebug(@"Dispatch event");
+    LogDebug(event);
+
     switch (_state) {
         case STATE_ACTIVE: {
             NSError *error;
@@ -73,16 +79,20 @@ typedef enum {
             [[[NSURLSession sharedSession] dataTaskWithRequest:req completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
                 if (error) {
                     LogError(error);
+                } else {
+                    LogDebug(@"Event dispatched successfuly");
                 }
             }] resume];
 
             return;
         }
         case STATE_PENDING: {
+            LogDebug(@"Enqueued event");
             [_eventQueue addObject:event];
             return;
         }
         case STATE_DISABLED: {
+            LogDebug(@"Discarded event");
             return;
         }
     }
