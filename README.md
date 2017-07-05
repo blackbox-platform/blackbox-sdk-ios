@@ -8,7 +8,7 @@ Integrating the Blackbox SDK into your app provides the platform with additonal 
 
 # Getting started
 
-## Before you start
+## Setup
 
 • Sign in or register at https://www.blackbox-platform.com/
 
@@ -35,9 +35,9 @@ end
 
 **Manual installation:**
 
-• Download a binary from `https://github.com/brightinteractive/blackbox-sdk-ios/releases`
+• Download a binary from https://github.com/brightinteractive/blackbox-sdk-ios/releases/latest
 
-• Add `BlackboxSDK.framework` to your project’s ”‘Link Binary with libraries’ build phase.
+• Add `BlackboxSDK.framework` to your project’s ‘Link Binary with libraries’ build phase.
 
 
 ## Recording revenue
