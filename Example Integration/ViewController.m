@@ -7,12 +7,17 @@
 //
 
 #import "ViewController.h"
+#import <BlackboxSDK/BlackboxSDK.h>
 
 @interface ViewController ()
 
 @end
 
 @implementation ViewController
+
+- (IBAction)handleTransactionSubmit:(id)sender {
+    [[BlackboxSDK sdk] recordRevenue:11.40 withCurrency:BBPCurrencyGBP];
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
