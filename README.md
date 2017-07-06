@@ -19,7 +19,7 @@ Integrating the Blackbox SDK into your app provides the platform with additonal 
 
 • Take a note of your API key and add it to your app's Info.plist file as the value for `BBPClientID`
 
-![Xcode plist setup](https://cdn.rawgit.com/blackbox-platform/blackbox-sdk-ios/master/img/plist-setup.svg)
+![Xcode plist setup](https://cdn.rawgit.com/blackbox-platform/blackbox-sdk-ios/master/img/plist-setup.png)
 
 
 ## Installing the SDK
@@ -44,7 +44,7 @@ end
 
 • Add `BlackboxSDK.framework` to your project’s ‘Link Binary with libraries’ and ‘Copy files’ build phase, ensuring that ‘Frameworks’ is chosen as the destination.
 
-![Xcode framework setup](https://cdn.rawgit.com/blackbox-platform/blackbox-sdk-ios/master/img/linker-setup.svg)
+![Xcode framework setup](https://cdn.rawgit.com/blackbox-platform/blackbox-sdk-ios/master/img/linker-setup.png)
 
 
 ## Recording revenue
