@@ -1,4 +1,4 @@
-![Blackbox SDK](https://cdn.rawgit.com/blackbox-platform/blackbox-sdk-ios/master/blackbox.svg)
+![Blackbox SDK](https://cdn.rawgit.com/blackbox-platform/blackbox-sdk-ios/master/img/blackbox.svg)
 
 [Blackbox Platform](https://www.blackbox-platform.com/) is your virtual campaign manager for
 Apple Search Ads. It automatically selects keywords to bid on and automatically adjusts your
@@ -19,6 +19,8 @@ Integrating the Blackbox SDK into your app provides the platform with additonal 
 
 • Take a note of your API key and add it to your app's Info.plist file as the value for `BBPClientID`
 
+![Xcode plist setup](https://cdn.rawgit.com/blackbox-platform/blackbox-sdk-ios/master/img/plist-setup.svg)
+
 
 ## Installing the SDK
 
@@ -38,7 +40,11 @@ end
 
 • Download a binary from https://github.com/blackbox-platform/blackbox-sdk-ios/releases/latest
 
-• Add `BlackboxSDK.framework` to your project’s ‘Link Binary with libraries’ build phase.
+• Drop BlackboxSDK into your xcode project.
+
+• Add `BlackboxSDK.framework` to your project’s ‘Link Binary with libraries’ and ‘Copy files’ build phase, ensuring that ‘Frameworks’ is chosen as the destination.
+
+![Xcode framework setup](https://cdn.rawgit.com/blackbox-platform/blackbox-sdk-ios/master/img/linker-setup.svg)
 
 
 ## Recording revenue
