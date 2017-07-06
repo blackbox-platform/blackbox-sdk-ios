@@ -416,7 +416,7 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
+					"BLACKBOX_DEBUG=1",
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "blackbox-sdk/Info.plist";

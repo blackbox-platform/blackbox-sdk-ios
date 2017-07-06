@@ -5,7 +5,7 @@
 #import "BBPEvent.h"
 #import "Util.h"
 
-#ifdef DEBUG
+#ifdef BLACKBOX_DEBUG
 #define BLACKBOX_API [NSProcessInfo processInfo].environment[@"BLACKBOX_API"]
 #else
 #define BLACKBOX_API @"https://blackbox-platform-prod.herokuapp.com"

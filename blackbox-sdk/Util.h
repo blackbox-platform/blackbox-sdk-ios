@@ -8,7 +8,7 @@ static void LogError(id error) {
 }
 
 static void LogDebug(id msg) {
-#ifdef DEBUG
+#ifdef BLACKBOX_DEBUG
     NSLog(@"[Blackbox] %@", msg);
 #endif
 }

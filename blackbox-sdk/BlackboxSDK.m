@@ -32,7 +32,7 @@
 }
 
 + (void)requestAttributionDetailsWithBlock:(void (^)(NSDictionary *attributionDetails, NSError *error))completionHandler {
-#ifdef DEBUG
+#ifdef BLACKBOX_DEBUG
     completionHandler([NSProcessInfo processInfo].environment, nil);
 #else
     [[ADClient sharedClient] requestAttributionDetailsWithBlock:completionHandler];
