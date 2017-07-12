@@ -6,15 +6,18 @@
 #import <AdSupport/AdSupport.h>
 
 #import "BlackboxSDK.h"
-#import "BBPClient.h"
+#import "BBPEventManager.h"
 #import "BBPEvent.h"
 #import "Util.h"
 
+@interface BlackboxSDK () <BBPEventManagerDelegate>
+@end
+
 @implementation BlackboxSDK {
-    BBPClient *_client;
+    BBPEventManager *_eventManager;
 }
 
-#define BLACKBOX_TOKEN_ID @"BBPClientID"
+#define BLACKBOX_TOKEN_ID @"BBPEventManagerID"
 
 static NSString *HAS_LAUNCHED_KEY = @"BBPApplicationHasLaunched___";
 static NSString *UUID_KEY = @"BBPUserIdentifier";
@@ -25,26 +28,6 @@ static NSString *CAMPAIGN_ID_KEY = @"BBPCampaignID";
                                              selector:@selector(handleApplicationLaunched:)
                                                  name:UIApplicationDidFinishLaunchingNotification
                                                object:nil];
-    
-    if ([self attributedCampaignId]) {
-        [[self sdk] handleAttributionDetectedForCampaign:[self attributedCampaignId] withKeyword:[NSNull null]];
-
-    } else {
-        [self requestAttributionDetailsWithBlock:^(NSDictionary *attributionDetails, NSError *error) {
-            if (attributionDetails[@"iad-attribution"] && attributionDetails[@"iad-campaign-id"]) {
-                [[self sdk] handleAttributionDetectedForCampaign:attributionDetails[@"iad-campaign-id"]
-                                                     withKeyword:attributionDetails[@"iad-keyword"]];
-            }
-        }];
-    }
-}
-
-+ (void)requestAttributionDetailsWithBlock:(void (^)(NSDictionary *attributionDetails, NSError *error))completionHandler {
-#ifdef BLACKBOX_DEBUG
-    completionHandler([NSProcessInfo processInfo].environment, nil);
-#else
-    [[ADClient sharedClient] requestAttributionDetailsWithBlock:completionHandler];
-#endif
 }
 
 + (instancetype)sdk {
@@ -52,66 +35,50 @@ static NSString *CAMPAIGN_ID_KEY = @"BBPCampaignID";
     static dispatch_once_t onceToken;
 
     dispatch_once(&onceToken, ^{
-        NSDictionary *info = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"Info" ofType:@"plist"]];
-
-        if (info[BLACKBOX_TOKEN_ID]) {
-            instance = [[self alloc] initWithToken:info[BLACKBOX_TOKEN_ID]];
-            LogDebug(@"Initialized client");
-
-        } else {
-            LogError(@"BBPClientID is not set in your Info.plist. Blackbox Platform will not receive attribution events until this is added.");
-        }
+        instance = [self new];
     });
 
     return instance;
 }
 
 - (instancetype)init {
-    [[NSException exceptionWithName:@"BBPError" reason:@"Use [BlackboxSDK sharedSDK], not [BlackboxSDK new] or [[BlackboxSDK alloc] init]" userInfo:nil] raise];
-    return nil;
-}
-
-- (instancetype)initWithToken:(NSString *)token {
     if (self = [super init]) {
-        _client = [[BBPClient alloc] initWithToken:token uuid:[BlackboxSDK uuid]];
+        _eventManager = [[BBPEventManager alloc] initWithDelegate:self];
     }
     
     return self;
 }
 
 - (void)handleApplicationLaunched:(id)_ {
-    if ([BlackboxSDK isFirstLaunchAfterInstall]) {
-        [_client dispatchEvent:[[BBPEvent alloc] initWithName:@"install"]];
-    }
-    
-    [_client dispatchEvent:[[BBPEvent alloc] initWithName:@"launch"]];
-}
-
-- (void)handleAttributionDetectedForCampaign:(NSString *)campaignId withKeyword:(NSObject *)keyword {
-    [_client activateWithCampaignId:campaignId keyword:keyword];
-    [BlackboxSDK setAttributedCampaignId:campaignId];
+    [_eventManager handleApplicationLaunched];
 }
 
 - (void)recordRevenue:(double)value withCurrency:(NSString *)currency {
-    [_client dispatchEvent:[[BBPEvent alloc] initMonetaryEventWithName:@"revenue" value:value currency:currency]];
+    [_eventManager recordRevenue:value withCurrency:currency];
 }
 
-+ (BOOL)isFirstLaunchAfterInstall {
-    static BOOL value = NO;
-    static dispatch_once_t onceToken;
 
+# pragma mark - as BBPEventManagerDelegate:
+
+- (NSString *)token {
+    static NSString *token;
+
+    static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        if (![[NSUserDefaults standardUserDefaults] boolForKey:HAS_LAUNCHED_KEY]) {
-            value = YES;
-            [[NSUserDefaults standardUserDefaults] setBool:YES forKey:HAS_LAUNCHED_KEY];
-            [[NSUserDefaults standardUserDefaults] synchronize];
+        NSDictionary *info = InfoPlist();
+        
+        if (info[BLACKBOX_TOKEN_ID]) {
+            token = info[BLACKBOX_TOKEN_ID];
+            
+        } else {
+            LogError(@"BBPClientID is not set in your Info.plist. Blackbox Platform will not receive attribution events until this is added.");
         }
     });
     
-    return value;
+    return token;
 }
 
-+ (NSString *)uuid {
+- (NSString *)userId {
     static NSString *value;
     
     static dispatch_once_t onceToken;
@@ -127,27 +94,96 @@ static NSString *CAMPAIGN_ID_KEY = @"BBPCampaignID";
     return value;
 }
 
-+ (NSString *)attributedCampaignId {
+- (BOOL)isFirstApplicationLaunch {
+    static BOOL value = NO;
+    static dispatch_once_t onceToken;
+    
+    dispatch_once(&onceToken, ^{
+        if (![[NSUserDefaults standardUserDefaults] boolForKey:HAS_LAUNCHED_KEY]) {
+            value = YES;
+            [[NSUserDefaults standardUserDefaults] setBool:YES forKey:HAS_LAUNCHED_KEY];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+        }
+    });
+    
+    return value;
+}
+
+- (NSString *)savedCampaignId {
     return [[NSUserDefaults standardUserDefaults] objectForKey:CAMPAIGN_ID_KEY];
 }
 
-+ (void)setAttributedCampaignId:(NSString *)id {
+- (void)saveCampaignId:(NSString *)id {
     [[NSUserDefaults standardUserDefaults] setObject:id forKey:CAMPAIGN_ID_KEY];
 }
 
-+ (NSString *)initialUUID {
+- (void)requestAttributionInformationWithBlock:(void (^)(NSString *campaignId, NSObject *keyword))block {
+    [self requestAttributionDictionaryWithBlock:^(NSDictionary *details, NSError *error) {
+        if (!details || !details[@"iad-attribution"]) {
+            block(nil, nil);
+        }
+        
+        
+        NSString *campaignId = details[@"iad-campaign-id"];
+        NSString *keyword = details[@"iad-keyword"] ?: [NSNull null];
+
+        block(campaignId, keyword);
+    }];
+}
+
+- (void)dispatchEventWithPayload:(NSDictionary *)payload url:(NSURL *)url {
+    NSError *error;
+    NSData *body = [NSJSONSerialization dataWithJSONObject:payload options:0 error:&error];
+
+    if (error) {
+        LogError(error);
+        return;
+    }
+    
+    NSMutableURLRequest *req = [NSMutableURLRequest requestWithURL:url];
+    
+    [req setHTTPMethod:@"PUT"];
+    [req setHTTPBody:body];
+    [req setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    [req setValue:[NSString stringWithFormat:@"Bearer %@", [self token]] forHTTPHeaderField:@"Authorization"];
+    
+    NSURLSessionTask * task = [[NSURLSession sharedSession] dataTaskWithRequest:req completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+        if (error) {
+            LogError(error);
+        } else {
+            LogDebug(@"Event dispatched");
+            LogError(response);
+        }
+    }];
+    
+    [task resume];
+}
+
+
+#pragma mark - Private:
+
+- (NSString *)initialUUID {
     if ([[ASIdentifierManager sharedManager] isAdvertisingTrackingEnabled]) {
         return [[[ASIdentifierManager sharedManager] advertisingIdentifier] UUIDString];
-
+        
     } else {
         return [[NSUUID UUID] UUIDString];
     }
 }
 
+- (void)requestAttributionDictionaryWithBlock:(void (^)(NSDictionary *details, NSError *error))block {
+#ifdef BLACKBOX_DEBUG
+    block([NSProcessInfo processInfo].environment, nil);
+    
+#else
+    [[ADClient sharedClient] requestAttributionDetailsWithBlock:block];
+
+#endif
+}
+
+@end
+
 NSString *BBPCurrencyGBP = @"GBP";
 NSString *BBPCurrencyUSD = @"USD";
 NSString *BBPCurrencyAUD = @"AUD";
 NSString *BBPCurrencyNZD = @"NZD";
-
-@end
-

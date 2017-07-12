@@ -3,12 +3,16 @@
 
 #import <Foundation/Foundation.h>
 
-static void LogError(id error) {
+static inline void LogError(id error) {
     NSLog(@"[Blackbox] %@", error);
 }
 
-static void LogDebug(id msg) {
+static inline void LogDebug(id msg) {
 #ifdef BLACKBOX_DEBUG
     NSLog(@"[Blackbox] %@", msg);
 #endif
+}
+
+static inline NSDictionary *InfoPlist() {
+    return [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"Info" ofType:@"plist"]];
 }

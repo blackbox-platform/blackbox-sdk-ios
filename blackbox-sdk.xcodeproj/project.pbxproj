@@ -14,8 +14,8 @@
 		2CD7BF5C1F0B9C85000BA4C0 /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CD7BF5B1F0B9C85000BA4C0 /* iAd.framework */; };
 		2CD7BF631F0BAB10000BA4C0 /* BBPEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = 2CD7BF611F0BAB10000BA4C0 /* BBPEvent.h */; };
 		2CD7BF641F0BAB10000BA4C0 /* BBPEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CD7BF621F0BAB10000BA4C0 /* BBPEvent.m */; };
-		2CD7BF681F0BADD3000BA4C0 /* BBPClient.h in Headers */ = {isa = PBXBuildFile; fileRef = 2CD7BF661F0BADD3000BA4C0 /* BBPClient.h */; };
-		2CD7BF691F0BADD3000BA4C0 /* BBPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CD7BF671F0BADD3000BA4C0 /* BBPClient.m */; };
+		2CD7BF681F0BADD3000BA4C0 /* BBPEventManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 2CD7BF661F0BADD3000BA4C0 /* BBPEventManager.h */; };
+		2CD7BF691F0BADD3000BA4C0 /* BBPEventManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CD7BF671F0BADD3000BA4C0 /* BBPEventManager.m */; };
 		2CD7BF721F0BC7B3000BA4C0 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CD7BF711F0BC7B3000BA4C0 /* main.m */; };
 		2CD7BF751F0BC7B3000BA4C0 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CD7BF741F0BC7B3000BA4C0 /* AppDelegate.m */; };
 		2CD7BF781F0BC7B3000BA4C0 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CD7BF771F0BC7B3000BA4C0 /* ViewController.m */; };
@@ -47,8 +47,8 @@
 		2CD7BF611F0BAB10000BA4C0 /* BBPEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBPEvent.h; sourceTree = "<group>"; };
 		2CD7BF621F0BAB10000BA4C0 /* BBPEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBPEvent.m; sourceTree = "<group>"; };
 		2CD7BF651F0BACAE000BA4C0 /* Util.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Util.h; sourceTree = "<group>"; };
-		2CD7BF661F0BADD3000BA4C0 /* BBPClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBPClient.h; sourceTree = "<group>"; };
-		2CD7BF671F0BADD3000BA4C0 /* BBPClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBPClient.m; sourceTree = "<group>"; };
+		2CD7BF661F0BADD3000BA4C0 /* BBPEventManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBPEventManager.h; sourceTree = "<group>"; };
+		2CD7BF671F0BADD3000BA4C0 /* BBPEventManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBPEventManager.m; sourceTree = "<group>"; };
 		2CD7BF6E1F0BC7B3000BA4C0 /* Example Integration.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Example Integration.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2CD7BF711F0BC7B3000BA4C0 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		2CD7BF731F0BC7B3000BA4C0 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -109,8 +109,8 @@
 				2C5835561F0A8BB8008E1856 /* Info.plist */,
 				2CD7BF541F0B971B000BA4C0 /* BlackboxSDK.h */,
 				2CD7BF551F0B971B000BA4C0 /* BlackboxSDK.m */,
-				2CD7BF661F0BADD3000BA4C0 /* BBPClient.h */,
-				2CD7BF671F0BADD3000BA4C0 /* BBPClient.m */,
+				2CD7BF661F0BADD3000BA4C0 /* BBPEventManager.h */,
+				2CD7BF671F0BADD3000BA4C0 /* BBPEventManager.m */,
 				2CD7BF611F0BAB10000BA4C0 /* BBPEvent.h */,
 				2CD7BF621F0BAB10000BA4C0 /* BBPEvent.m */,
 				2CD7BF651F0BACAE000BA4C0 /* Util.h */,
@@ -159,7 +159,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2CD7BF681F0BADD3000BA4C0 /* BBPClient.h in Headers */,
+				2CD7BF681F0BADD3000BA4C0 /* BBPEventManager.h in Headers */,
 				2CD7BF631F0BAB10000BA4C0 /* BBPEvent.h in Headers */,
 				2CD7BF561F0B971B000BA4C0 /* BlackboxSDK.h in Headers */,
 			);
@@ -268,7 +268,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2CD7BF571F0B971B000BA4C0 /* BlackboxSDK.m in Sources */,
-				2CD7BF691F0BADD3000BA4C0 /* BBPClient.m in Sources */,
+				2CD7BF691F0BADD3000BA4C0 /* BBPEventManager.m in Sources */,
 				2CD7BF641F0BAB10000BA4C0 /* BBPEvent.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

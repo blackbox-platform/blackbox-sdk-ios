@@ -1,7 +1,7 @@
-//  BBPClient.m
+//  BBPEventManager.m
 //  Copyright © 2017 Redbox Mobile. All rights reserved.
 
-#import "BBPClient.h"
+#import "BBPEventManager.h"
 #import "BBPEvent.h"
 #import "Util.h"
 
@@ -16,27 +16,46 @@ typedef enum {
     STATE_PENDING,
     STATE_DISABLED,
     STATE_ACTIVE,
-} BBPClientState;
+} BBPEventManagerState;
 
 
-@implementation BBPClient {
+@implementation BBPEventManager {
+    NSObject<BBPEventManagerDelegate> *_delegate;
     NSString *_campaignId;
-    NSString *_token;
     NSObject *_keyword;
-    NSString *_uuid;
     NSMutableArray *_eventQueue;
-    BBPClientState _state;
+    BBPEventManagerState _state;
 }
 
-- (instancetype)initWithToken:(NSString *)token uuid:(NSString *)uuid {
+- (instancetype)initWithDelegate:(NSObject<BBPEventManagerDelegate> *)delegate {
     if (self = [super init]) {
-        _token = token;
-        _uuid = uuid;
+        _delegate = delegate;
         _eventQueue = [NSMutableArray new];
         _state = STATE_PENDING;
     }
     
     return self;
+}
+
+- (void)handleApplicationLaunched {
+    if ([_delegate isFirstApplicationLaunch]) {
+        [self dispatchEvent:[[BBPEvent alloc] initWithName:@"install"]];
+    }
+    
+    [self dispatchEvent:[[BBPEvent alloc] initWithName:@"launch"]];
+    
+    if ([_delegate savedCampaignId]) {
+        [self activateWithCampaignId:[_delegate savedCampaignId] keyword:[NSNull null]];
+
+    } else {
+        [_delegate requestAttributionInformationWithBlock:^(NSString *campaignId, NSObject *keyword) {
+            [self activateWithCampaignId:campaignId keyword:keyword];
+        }];
+    }
+}
+
+- (void)recordRevenue:(double)value withCurrency:(NSString *)currency {
+    [self dispatchEvent:[[BBPEvent alloc] initMonetaryEventWithName:@"revenue" value:value currency:currency]];
 }
 
 - (void)activateWithCampaignId:(NSString *)campaignId keyword:(NSObject *)keyword {
@@ -65,38 +84,20 @@ typedef enum {
 
     switch (_state) {
         case STATE_ACTIVE: {
-            NSError *error;
-            NSData *body = [event payloadWithAttributionKeyword:_keyword uuid:_uuid error:&error];
-            if (error) {
-                LogError(error);
-                return;
-            }
-            
-            NSMutableURLRequest *req = [NSMutableURLRequest requestWithURL:[self urlForEventType:event.type]];
-            
-            [req setHTTPMethod:@"PUT"];
-            [req setHTTPBody:body];
-            [req setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-            [req setValue:[NSString stringWithFormat:@"Bearer %@", _token] forHTTPHeaderField:@"Authorization"];
-            
-            [[[NSURLSession sharedSession] dataTaskWithRequest:req completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
-                if (error) {
-                    LogError(error);
-                } else {
-                    LogDebug(@"Event dispatched");
-                    LogError(response);
-                }
-            }] resume];
+            NSURL *url = [self urlForEventType:event.type];
+            [_delegate dispatchEventWithPayload:[event payloadWithUserId:[_delegate userId]] url:url];
 
             return;
         }
         case STATE_PENDING: {
             LogDebug(@"Enqueued event");
             [_eventQueue addObject:event];
+
             return;
         }
         case STATE_DISABLED: {
             LogDebug(@"Discarded event");
+
             return;
         }
     }

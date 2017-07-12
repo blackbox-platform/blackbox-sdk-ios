@@ -19,20 +19,30 @@
 }
 
 - (instancetype)initWithName:(NSString *)name {
-    return [self initWithType:BBPStandardEvent payload:@{@"name": name}];
+    return [self initWithType:BBPStandardEvent
+                      payload:@{@"name": name}];
+}
+
+- (instancetype)initWithName:(NSString *)name keyword:(NSString *)keyword {
+    return [self initWithType:BBPStandardEvent
+                      payload:@{@"name": name, @"keyword": keyword}];
 }
 
 - (instancetype)initMonetaryEventWithName:(NSString *)name value:(double)value currency:(NSString *)currency {
-    return [self initWithType:BBPRevenueEvent payload:@{@"name": name, @"value": [NSNumber numberWithDouble:value], @"currency": currency}];
+    return [self initWithType:BBPRevenueEvent
+                      payload:@{@"name": name, @"value": [NSNumber numberWithDouble:value], @"currency": currency}];
 }
 
-- (NSData *)payloadWithAttributionKeyword:(NSObject *)keyword uuid:(NSString *)uuid error:(NSError *__autoreleasing *)error {
+- (NSDictionary *)payloadWithUserId:(NSString *)uuid {
     NSMutableDictionary *payload = [_data mutableCopy];
-    payload[@"keyword"] = keyword;
-    payload[@"id"] = @(_id);
+    
+    if (_id) {
+        payload[@"id"] = @(_id);
+    }
+
     payload[@"user"] = uuid;
 
-    return [NSJSONSerialization dataWithJSONObject:payload options:0 error:error];
+    return payload;
 }
 
 - (NSString *)description {

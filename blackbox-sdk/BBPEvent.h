@@ -11,10 +11,11 @@ typedef enum {
 @interface BBPEvent : NSObject
 
 - (instancetype)initMonetaryEventWithName:(NSString *)name value:(double)value currency:(NSString *)currency;
+- (instancetype)initWithName:(NSString *)name keyword:(NSString *)keyword;
 - (instancetype)initWithName:(NSString *)name;
 
 @property (assign, readonly) BBPEventType type;
 
-- (NSData *)payloadWithAttributionKeyword:(NSObject *)keyword uuid:(NSString *)uuid error:(NSError *__autoreleasing *)error;
+- (NSDictionary *)payloadWithUserId:(NSString *)uuid;
 
 @end
