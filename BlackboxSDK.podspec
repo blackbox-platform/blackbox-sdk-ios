@@ -20,7 +20,7 @@ Pod::Spec.new do |s|
   s.platform     = :ios
   s.platform     = :ios, "10.0"
 
-  s.source       = { :git => "https://github.com/brightinteractive/blackbox-sdk-ios.git", :tag => "#{s.version}" }
+  s.source       = { :git => "https://github.com/blackbox-platform/blackbox-sdk-ios.git", :tag => "#{s.version}" }
 
   s.source_files  = "blackbox-sdk/*.{h,m}"
   s.public_header_files = "blackbox-sdk/BlackboxSDK.h"
