@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		2C858C481F16516400C0399F /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C858C471F16516400C0399F /* AdSupport.framework */; };
+		2C858C501F16714300C0399F /* BBPEventManagerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C858C4F1F16714300C0399F /* BBPEventManagerTests.m */; };
+		2C858C551F16714F00C0399F /* BBPEventManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CD7BF671F0BADD3000BA4C0 /* BBPEventManager.m */; };
+		2C858C561F16714F00C0399F /* BBPEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CD7BF621F0BAB10000BA4C0 /* BBPEvent.m */; };
+		2C858C591F16721000C0399F /* BBPMockEventManagerDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C858C581F16721000C0399F /* BBPMockEventManagerDelegate.m */; };
 		2CD7BF561F0B971B000BA4C0 /* BlackboxSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 2CD7BF541F0B971B000BA4C0 /* BlackboxSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		2CD7BF571F0B971B000BA4C0 /* BlackboxSDK.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CD7BF551F0B971B000BA4C0 /* BlackboxSDK.m */; };
 		2CD7BF5A1F0B9C5E000BA4C0 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CD7BF591F0B9C5E000BA4C0 /* UIKit.framework */; };
@@ -40,6 +44,11 @@
 		2C5835521F0A8BB8008E1856 /* BlackboxSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BlackboxSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C5835561F0A8BB8008E1856 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2C858C471F16516400C0399F /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
+		2C858C4D1F16714300C0399F /* BlackboxSDKTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BlackboxSDKTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		2C858C4F1F16714300C0399F /* BBPEventManagerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BBPEventManagerTests.m; sourceTree = "<group>"; };
+		2C858C511F16714300C0399F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2C858C571F16721000C0399F /* BBPMockEventManagerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBPMockEventManagerDelegate.h; sourceTree = "<group>"; };
+		2C858C581F16721000C0399F /* BBPMockEventManagerDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBPMockEventManagerDelegate.m; sourceTree = "<group>"; };
 		2CD7BF541F0B971B000BA4C0 /* BlackboxSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlackboxSDK.h; sourceTree = "<group>"; };
 		2CD7BF551F0B971B000BA4C0 /* BlackboxSDK.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlackboxSDK.m; sourceTree = "<group>"; };
 		2CD7BF591F0B9C5E000BA4C0 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -72,6 +81,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		2C858C4A1F16714300C0399F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		2CD7BF6B1F0BC7B3000BA4C0 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -89,6 +105,7 @@
 			children = (
 				2C5835541F0A8BB8008E1856 /* blackbox-sdk */,
 				2CD7BF6F1F0BC7B3000BA4C0 /* Example Integration */,
+				2C858C4E1F16714300C0399F /* BlackboxSDKTests */,
 				2C5835531F0A8BB8008E1856 /* Products */,
 				2CD7BF581F0B9C5E000BA4C0 /* Frameworks */,
 			);
@@ -99,6 +116,7 @@
 			children = (
 				2C5835521F0A8BB8008E1856 /* BlackboxSDK.framework */,
 				2CD7BF6E1F0BC7B3000BA4C0 /* Example Integration.app */,
+				2C858C4D1F16714300C0399F /* BlackboxSDKTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -116,6 +134,17 @@
 				2CD7BF651F0BACAE000BA4C0 /* Util.h */,
 			);
 			path = "blackbox-sdk";
+			sourceTree = "<group>";
+		};
+		2C858C4E1F16714300C0399F /* BlackboxSDKTests */ = {
+			isa = PBXGroup;
+			children = (
+				2C858C511F16714300C0399F /* Info.plist */,
+				2C858C4F1F16714300C0399F /* BBPEventManagerTests.m */,
+				2C858C571F16721000C0399F /* BBPMockEventManagerDelegate.h */,
+				2C858C581F16721000C0399F /* BBPMockEventManagerDelegate.m */,
+			);
+			path = BlackboxSDKTests;
 			sourceTree = "<group>";
 		};
 		2CD7BF581F0B9C5E000BA4C0 /* Frameworks */ = {
@@ -186,6 +215,23 @@
 			productReference = 2C5835521F0A8BB8008E1856 /* BlackboxSDK.framework */;
 			productType = "com.apple.product-type.framework";
 		};
+		2C858C4C1F16714300C0399F /* BlackboxSDKTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2C858C541F16714300C0399F /* Build configuration list for PBXNativeTarget "BlackboxSDKTests" */;
+			buildPhases = (
+				2C858C491F16714300C0399F /* Sources */,
+				2C858C4A1F16714300C0399F /* Frameworks */,
+				2C858C4B1F16714300C0399F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = BlackboxSDKTests;
+			productName = BlackboxSDKTests;
+			productReference = 2C858C4D1F16714300C0399F /* BlackboxSDKTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		2CD7BF6D1F0BC7B3000BA4C0 /* Example Integration */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2CD7BF841F0BC7B3000BA4C0 /* Build configuration list for PBXNativeTarget "Example Integration" */;
@@ -217,6 +263,10 @@
 						CreatedOnToolsVersion = 8.3.3;
 						ProvisioningStyle = Automatic;
 					};
+					2C858C4C1F16714300C0399F = {
+						CreatedOnToolsVersion = 8.3.3;
+						ProvisioningStyle = Automatic;
+					};
 					2CD7BF6D1F0BC7B3000BA4C0 = {
 						CreatedOnToolsVersion = 8.3.3;
 						ProvisioningStyle = Automatic;
@@ -238,12 +288,20 @@
 			targets = (
 				2C5835511F0A8BB8008E1856 /* BlackboxSDK */,
 				2CD7BF6D1F0BC7B3000BA4C0 /* Example Integration */,
+				2C858C4C1F16714300C0399F /* BlackboxSDKTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
 		2C5835501F0A8BB8008E1856 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2C858C4B1F16714300C0399F /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -270,6 +328,17 @@
 				2CD7BF571F0B971B000BA4C0 /* BlackboxSDK.m in Sources */,
 				2CD7BF691F0BADD3000BA4C0 /* BBPEventManager.m in Sources */,
 				2CD7BF641F0BAB10000BA4C0 /* BBPEvent.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2C858C491F16714300C0399F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2C858C551F16714F00C0399F /* BBPEventManager.m in Sources */,
+				2C858C561F16714F00C0399F /* BBPEvent.m in Sources */,
+				2C858C591F16721000C0399F /* BBPMockEventManagerDelegate.m in Sources */,
+				2C858C501F16714300C0399F /* BBPEventManagerTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -450,6 +519,28 @@
 			};
 			name = Release;
 		};
+		2C858C521F16714300C0399F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = BlackboxSDKTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.redbox-mobile.blackbox-sdk.BlackboxSDKTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		2C858C531F16714300C0399F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = BlackboxSDKTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.redbox-mobile.blackbox-sdk.BlackboxSDKTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
 		2CD7BF821F0BC7B3000BA4C0 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -489,6 +580,15 @@
 			buildConfigurations = (
 				2C5835671F0A8BB8008E1856 /* Debug */,
 				2C5835681F0A8BB8008E1856 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2C858C541F16714300C0399F /* Build configuration list for PBXNativeTarget "BlackboxSDKTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2C858C521F16714300C0399F /* Debug */,
+				2C858C531F16714300C0399F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

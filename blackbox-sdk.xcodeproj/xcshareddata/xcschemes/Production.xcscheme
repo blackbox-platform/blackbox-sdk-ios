@@ -28,7 +28,26 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "2C858C4C1F16714300C0399F"
+               BuildableName = "BlackboxSDKTests.xctest"
+               BlueprintName = "BlackboxSDKTests"
+               ReferencedContainer = "container:blackbox-sdk.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "2C5835511F0A8BB8008E1856"
+            BuildableName = "BlackboxSDK.framework"
+            BlueprintName = "BlackboxSDK"
+            ReferencedContainer = "container:blackbox-sdk.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </TestAction>
