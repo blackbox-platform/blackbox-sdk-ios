@@ -25,6 +25,7 @@ Pod::Spec.new do |s|
   s.source_files  = "blackbox-sdk/*.{h,m}"
   s.public_header_files = "blackbox-sdk/BlackboxSDK.h"
   s.framework  = "iAd"
+  s.framework  = "AdSupport"
 
   s.requires_arc = true
 end

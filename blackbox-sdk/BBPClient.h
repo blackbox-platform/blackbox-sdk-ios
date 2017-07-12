@@ -7,9 +7,9 @@
 
 @interface BBPClient : NSObject
 
-- (instancetype)initWithToken:(NSString *)token;
+- (instancetype)initWithToken:(NSString *)token uuid:(NSString *)uuid;
 
-- (void)activateWithCampaignId:(NSString *)campaignId keyword:(NSString *)keyword;
+- (void)activateWithCampaignId:(NSString *)campaignId keyword:(NSObject *)keyword;
 - (void)disable;
 
 - (void)dispatchEvent:(BBPEvent *)event;

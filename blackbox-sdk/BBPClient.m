@@ -22,14 +22,16 @@ typedef enum {
 @implementation BBPClient {
     NSString *_campaignId;
     NSString *_token;
-    NSString *_keyword;
+    NSObject *_keyword;
+    NSString *_uuid;
     NSMutableArray *_eventQueue;
     BBPClientState _state;
 }
 
-- (instancetype)initWithToken:(NSString *)token {
+- (instancetype)initWithToken:(NSString *)token uuid:(NSString *)uuid {
     if (self = [super init]) {
         _token = token;
+        _uuid = uuid;
         _eventQueue = [NSMutableArray new];
         _state = STATE_PENDING;
     }
@@ -37,7 +39,7 @@ typedef enum {
     return self;
 }
 
-- (void)activateWithCampaignId:(NSString *)campaignId keyword:(NSString *)keyword {
+- (void)activateWithCampaignId:(NSString *)campaignId keyword:(NSObject *)keyword {
     LogDebug(@"Activating");
 
     _campaignId = campaignId;
@@ -64,7 +66,7 @@ typedef enum {
     switch (_state) {
         case STATE_ACTIVE: {
             NSError *error;
-            NSData *body = [event payloadWithAttributionKeyword:_keyword error:&error];
+            NSData *body = [event payloadWithAttributionKeyword:_keyword uuid:_uuid error:&error];
             if (error) {
                 LogError(error);
                 return;

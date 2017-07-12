@@ -15,6 +15,6 @@ typedef enum {
 
 @property (assign, readonly) BBPEventType type;
 
-- (NSData *)payloadWithAttributionKeyword:(NSString *)keyword error:(NSError **)error;
+- (NSData *)payloadWithAttributionKeyword:(NSObject *)keyword uuid:(NSString *)uuid error:(NSError *__autoreleasing *)error;
 
 @end

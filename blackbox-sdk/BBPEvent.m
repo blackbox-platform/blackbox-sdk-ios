@@ -26,10 +26,11 @@
     return [self initWithType:BBPRevenueEvent payload:@{@"name": name, @"value": [NSNumber numberWithDouble:value], @"currency": currency}];
 }
 
-- (NSData *)payloadWithAttributionKeyword:(NSString *)keyword error:(NSError *__autoreleasing *)error {
+- (NSData *)payloadWithAttributionKeyword:(NSObject *)keyword uuid:(NSString *)uuid error:(NSError *__autoreleasing *)error {
     NSMutableDictionary *payload = [_data mutableCopy];
     payload[@"keyword"] = keyword;
     payload[@"id"] = @(_id);
+    payload[@"user"] = uuid;
 
     return [NSJSONSerialization dataWithJSONObject:payload options:0 error:error];
 }

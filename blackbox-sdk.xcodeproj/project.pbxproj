@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2C858C481F16516400C0399F /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C858C471F16516400C0399F /* AdSupport.framework */; };
 		2CD7BF561F0B971B000BA4C0 /* BlackboxSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 2CD7BF541F0B971B000BA4C0 /* BlackboxSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		2CD7BF571F0B971B000BA4C0 /* BlackboxSDK.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CD7BF551F0B971B000BA4C0 /* BlackboxSDK.m */; };
 		2CD7BF5A1F0B9C5E000BA4C0 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CD7BF591F0B9C5E000BA4C0 /* UIKit.framework */; };
@@ -38,6 +39,7 @@
 /* Begin PBXFileReference section */
 		2C5835521F0A8BB8008E1856 /* BlackboxSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BlackboxSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C5835561F0A8BB8008E1856 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2C858C471F16516400C0399F /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		2CD7BF541F0B971B000BA4C0 /* BlackboxSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlackboxSDK.h; sourceTree = "<group>"; };
 		2CD7BF551F0B971B000BA4C0 /* BlackboxSDK.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlackboxSDK.m; sourceTree = "<group>"; };
 		2CD7BF591F0B9C5E000BA4C0 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -64,6 +66,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2C858C481F16516400C0399F /* AdSupport.framework in Frameworks */,
 				2CD7BF5C1F0B9C85000BA4C0 /* iAd.framework in Frameworks */,
 				2CD7BF5A1F0B9C5E000BA4C0 /* UIKit.framework in Frameworks */,
 			);
@@ -118,6 +121,7 @@
 		2CD7BF581F0B9C5E000BA4C0 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				2C858C471F16516400C0399F /* AdSupport.framework */,
 				2CD7BF5B1F0B9C85000BA4C0 /* iAd.framework */,
 				2CD7BF591F0B9C5E000BA4C0 /* UIKit.framework */,
 			);
