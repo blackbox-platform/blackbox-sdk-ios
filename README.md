@@ -1,5 +1,7 @@
 ![Blackbox SDK](https://cdn.rawgit.com/blackbox-platform/blackbox-sdk-ios/master/img/blackbox.svg)
 
+[![Build Status](https://travis-ci.org/blackbox-platform/blackbox-sdk-ios.svg?branch=master)](https://travis-ci.org/blackbox-platform/blackbox-sdk-ios)
+
 [Blackbox Platform](https://www.blackbox-platform.com/) is your virtual campaign manager for
 Apple Search Ads. It automatically selects keywords to bid on and automatically adjusts your
 bid strategy to give you the best results for your money.
