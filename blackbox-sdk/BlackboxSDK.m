@@ -17,7 +17,7 @@
     BBPEventManager *_eventManager;
 }
 
-#define BLACKBOX_TOKEN_ID @"BBPEventManagerID"
+#define BLACKBOX_TOKEN_ID @"BBPClientID"
 
 static NSString *HAS_LAUNCHED_KEY = @"BBPApplicationHasLaunched___";
 static NSString *UUID_KEY = @"BBPUserIdentifier";
