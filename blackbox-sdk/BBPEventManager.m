@@ -60,8 +60,10 @@ typedef enum {
 
 - (void)activateWithCampaignId:(NSString *)campaignId keyword:(NSObject *)keyword {
     LogDebug(@"Activating");
+    
+    NSString *injectedCampaignId = [[[NSProcessInfo processInfo] environment] objectForKey:@"BBPTestCampaignId"];
 
-    _campaignId = campaignId;
+    _campaignId = injectedCampaignId ?: campaignId;
     _keyword = keyword;
     _state = STATE_ACTIVE;
     

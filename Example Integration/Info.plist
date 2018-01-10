@@ -9,8 +9,8 @@
 	</dict>
 	<key>CFBundleDisplayName</key>
 	<string></string>
-	<key>BBPEventManagerID</key>
-	<string>1234</string>
+	<key>BBPClientID</key>
+	<string>123456=</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>LSApplicationCategoryType</key>

@@ -118,8 +118,11 @@ static NSString *CAMPAIGN_ID_KEY = @"BBPCampaignID";
 }
 
 - (void)requestAttributionInformationWithBlock:(void (^)(NSString *campaignId, NSObject *keyword))block {
-    [self requestAttributionDictionaryWithBlock:^(NSDictionary *details, NSError *error) {
+    [self requestAttributionDictionaryWithBlock:^(NSDictionary *response, NSError *error) {
+        NSDictionary *details = [self attributionInformationForSearchAdsResponse:response];
+
         if (!details || !details[@"iad-attribution"]) {
+            LogError(error); 
             block(nil, nil);
         }
         
@@ -172,13 +175,30 @@ static NSString *CAMPAIGN_ID_KEY = @"BBPCampaignID";
 }
 
 - (void)requestAttributionDictionaryWithBlock:(void (^)(NSDictionary *details, NSError *error))block {
-#ifdef BLACKBOX_DEBUG
-    block([NSProcessInfo processInfo].environment, nil);
     
-#else
     [[ADClient sharedClient] requestAttributionDetailsWithBlock:block];
+}
 
-#endif
+- (NSDictionary *)attributionInformationForSearchAdsResponse:(NSDictionary *)response {
+    if (!response) {
+        return nil;
+    }
+    
+    NSDictionary *details = response[@"Version3.1"];
+    if (details) {
+        return details;
+    }
+    
+    NSArray *keys = [response allKeys];
+    NSInteger match = [keys indexOfObjectPassingTest:^BOOL(NSString *key, NSUInteger idx, BOOL * _Nonnull stop) {
+        return [key containsString:@"Version3."];
+    }];
+    
+    if (match >= 0) {
+        return details[keys[match]];
+    } else {
+        return nil;
+    }
 }
 
 @end
